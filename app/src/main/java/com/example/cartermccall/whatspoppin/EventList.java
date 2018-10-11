@@ -1,6 +1,7 @@
 package com.example.cartermccall.whatspoppin;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -32,7 +35,7 @@ public class EventList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_list, container, false);
 
-        ArrayList<Event> events = new ArrayList<Event>();
+        final ArrayList<Event> events = new ArrayList<Event>();
         eventList = (RecyclerView)view.findViewById(R.id.event_list);
 
         Event event1 = new Event();
@@ -49,7 +52,17 @@ public class EventList extends Fragment {
         events.add(event2);
         layoutManager = new LinearLayoutManager(getContext());
         eventList.setLayoutManager(layoutManager);
-        eventAdapter = new EventAdapter(getContext(),events);
+
+        RecyclerViewClickListener listener = new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(getContext(), "Position " + position, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+
+
+        eventAdapter = new EventAdapter(getContext(),events, listener);
         eventList.setAdapter(eventAdapter);
 
         return view;

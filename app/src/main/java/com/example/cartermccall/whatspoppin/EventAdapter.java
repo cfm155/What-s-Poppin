@@ -11,22 +11,32 @@ import java.util.ArrayList;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private Context context;
-    private ArrayList<Event>events;
+    private ArrayList<Event> events;
+    private RecyclerViewClickListener mListener;
 
-    public EventAdapter(Context context, ArrayList<Event> dataSet) {
+    public EventAdapter(Context context, ArrayList<Event> dataSet, RecyclerViewClickListener clickListener) {
         this.context = context;
         this.events = dataSet;
+        this.mListener = clickListener;
     }
 
-    public static class EventViewHolder extends RecyclerView.ViewHolder {
+    public static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView titleView;
         public TextView dateView;
         public TextView locationView;
-        public EventViewHolder(View v) {
+        private RecyclerViewClickListener mListener;
+        public EventViewHolder(View v, RecyclerViewClickListener listener) {
             super(v);
             titleView = v.findViewById(R.id.title_view);
             dateView = v.findViewById(R.id.date_view);
             locationView = v.findViewById(R.id.location_view);
+            mListener = listener;
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view){
+            mListener.onClick(view, getAdapterPosition());
         }
     }
 
@@ -40,7 +50,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.event_cell, parent, false);
-        EventViewHolder vh = new EventViewHolder(v);
+        EventViewHolder vh = new EventViewHolder(v, mListener);
         return vh;
     }
 
