@@ -56,7 +56,11 @@ public class EventList extends Fragment {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getContext(), "Position " + position, Toast.LENGTH_SHORT).show();
+                    Event event = (Event) events.get(position);
+                    Intent intent = new Intent(view.getContext(), EventActivity.class);
+                    intent.putExtra("event", (Serializable)event);
+                    startActivity(intent);
+
             }
         };
 
