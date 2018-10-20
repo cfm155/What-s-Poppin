@@ -10,9 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import java.util.Calendar;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 
 
 /**
@@ -37,6 +38,8 @@ public class EventList extends Fragment {
 
         final ArrayList<Event> events = new ArrayList<Event>();
         eventList = (RecyclerView)view.findViewById(R.id.event_list);
+
+        System.out.println(Calendar.getInstance().getTime());
 
         Event event1 = new Event();
         event1.setTitle("Swine and Psalms");

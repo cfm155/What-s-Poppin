@@ -2,12 +2,11 @@ package com.example.cartermccall.whatspoppin;
 
 import java.util.LinkedList;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
-public class Day extends RealmObject {
-    @PrimaryKey
+public class Day{
     private LinkedList<Event> dailyEvents = new LinkedList<Event>();
 
+    public void addEvent(Event event){
+        dailyEvents.add(event);
+    }
 
 }
