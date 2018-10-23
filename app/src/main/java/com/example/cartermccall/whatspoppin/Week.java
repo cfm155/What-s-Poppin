@@ -1,8 +1,8 @@
 package com.example.cartermccall.whatspoppin;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -11,7 +11,7 @@ public class Week extends RealmObject {
     private String id;
 
     //Week contains an ArrayList of Days
-    private ArrayList<Day> week = new ArrayList<>();
+    private RealmList<Day> week = new RealmList<>();
 
     public String getId() {
         return id;
