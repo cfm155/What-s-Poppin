@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class Day extends RealmObject {
     @PrimaryKey
-    private String id;
+    private String id = "calendarDay";
 
     private RealmList<Event> dailyEvents = new RealmList<Event>();
 
@@ -22,6 +22,14 @@ public class Day extends RealmObject {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Event getEvent(int pos){
+        return dailyEvents.get(pos);
+    }
+
+    public int getEventSize (){
+        return dailyEvents.size();
     }
 
 }

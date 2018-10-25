@@ -10,6 +10,7 @@ public class Event extends RealmObject implements Serializable {
     private String title;
     private String date;
     private String location;
+    private String time;
 
     public String getTitle() {
         return title;
@@ -25,6 +26,14 @@ public class Event extends RealmObject implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime(){
+        return time;
     }
 
     public String getLocation() {

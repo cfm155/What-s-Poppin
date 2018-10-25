@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
 public class EventActivity extends AppCompatActivity {
     private TextView textView;
 
@@ -17,5 +21,13 @@ public class EventActivity extends AppCompatActivity {
 
         Event event = (Event) getIntent().getSerializableExtra("event");
         textView.setText(event.getTitle());
+
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Week> weeks = realm.where(Week.class).findAll();
+
+
     }
+
+
+
 }
