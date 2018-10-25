@@ -8,7 +8,8 @@ import io.realm.annotations.PrimaryKey;
 
 public class Week extends RealmObject {
     @PrimaryKey
-    private String id;
+    private String id = "calendarWeek";
+    private String day;
 
     //Week contains an ArrayList of Days
     private RealmList<Day> week = new RealmList<>();
@@ -21,4 +22,23 @@ public class Week extends RealmObject {
         this.id = id;
     }
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void listAdd(Day day, int pos){
+        week.add(pos, day);
+    }
+
+    public Day listGet(int pos){
+        return week.get(pos);
+    }
+
+    public void listReplace(int pos, Day day){
+        week.set(pos, day);
+    }
 }

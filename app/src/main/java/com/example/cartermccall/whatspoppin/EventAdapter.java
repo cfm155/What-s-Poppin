@@ -7,16 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import io.realm.RealmResults;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private Context context;
-    private ArrayList<Event> events;
+    private RealmResults<Week> weeks;
     private RecyclerViewClickListener mListener;
 
-    public EventAdapter(Context context, ArrayList<Event> dataSet, RecyclerViewClickListener clickListener) {
+    public EventAdapter(Context context, RealmResults<Week> dataSet, RecyclerViewClickListener clickListener) {
         this.context = context;
-        this.events = dataSet;
+        this.weeks = dataSet;
         this.mListener = clickListener;
     }
 
@@ -42,7 +42,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public int getItemCount(){
-        return events.size();
+        return weeks.get(0).listGet(0).getEventSize();
     }
 
     @Override
@@ -56,9 +56,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
-        holder.titleView.setText(events.get(position).getTitle());
-        holder.dateView.setText(events.get(position).getDate());
-        holder.locationView.setText(events.get(position).getLocation());
+        //Pos value is placeholder, replace with getDay function when complete
+        holder.titleView.setText(weeks.get(0).listGet(0).getEvent(0).getTitle());
+        holder.dateView.setText(weeks.get(0).listGet(0).getEvent(0).getDate());
+        holder.locationView.setText(weeks.get(0).listGet(0).getEvent(0).getLocation());
     }
 
 }
