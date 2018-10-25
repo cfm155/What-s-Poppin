@@ -5,8 +5,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@font/robotoslab_bold</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay"></style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:fontFamily">@font/robotoslab_bold</item>
+    </style>
 
 </resources>
