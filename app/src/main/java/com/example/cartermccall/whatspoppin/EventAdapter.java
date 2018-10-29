@@ -59,7 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
         holder.titleView.setText(events.get(position).getTitle());
-        holder.dateView.setText(events.get(position).getDate());
+        holder.dateView.setText(events.get(position).getTime());
         holder.locationView.setText(events.get(position).getLocation());
         if(events.get(position).getRating() < 34){
             holder.poppinView.setImageResource(R.drawable.unpopped);

@@ -36,46 +36,72 @@ public class CalendarList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar_list, container, false);
 
         calendarList = (RecyclerView) view.findViewById(R.id.calendar_list);
-        final ArrayList<Event> events = new ArrayList<Event>();
         final ArrayList<Day> days = new ArrayList<Day>();
         System.out.println(Calendar.getInstance().getTime());
 
+        Event event = new Event();
+        event.setTitle("Free Wine Tasting");
+        event.setDate("October 31");
+        event.setTime("5:00-8:00 pm");
+        event.setLocation("Vino 209 Wine Cafe");
+        event.setRating(50);
+
         Event event1 = new Event();
-        event1.setTitle("Swine and Psalms");
-        event1.setDate("October 30");
-        event1.setLocation("A cornfield");
+        event1.setTitle("Halloween Freak Out!");
+        event1.setDate("October 31");
+        event1.setTime("8:00-12:00 am");
+        event1.setLocation("Des Moines Social Club");
+        event1.setRating(99.9);
 
-        Event event2 = new Event();
-        event2.setTitle("Less Swine, More Psalms");
-        event2.setDate("October 31");
-        event2.setLocation("A cornfield over");
-
-        events.add(event1);
-        events.add(event2);
+        Event event4 = new Event();
+        event4.setTitle("Deep Release Yoga Workshop");
+        event4.setDate("Every Week Day");
+        event4.setTime("11:00-1:00 pm");
+        event4.setLocation("Wellmark YMCA");
+        event4.setDescription("Join popular YMCA yoga instructor Kelby A. for this deep dive into your personal yoga practice. Whether you are looking to start a personal practice or extend your current routine Kelby will help you realign your energetic system, new your mind and restore your body.");
+        event4.setRating(50);
 
         Day monday = new Day();
         monday.setDay(" Monday \n November 5 ");
-        monday.addEvent(event1);
-        monday.addEvent(event2);
+        monday.addEvent(event4);
+        monday.addEvent(EventList.events.get(4));
+        monday.addEvent(EventList.events.get(1));
+
 
         Day tuesday = new Day();
         tuesday.setDay(" Tuesday \n October 30 ");
-        tuesday.addEvent(event2);
+        tuesday.setDailyEvents(EventList.events);
 
         Day wednesday = new Day();
         wednesday.setDay(" Wednesday \n October 31 ");
+        wednesday.addEvent(event);
+        wednesday.addEvent(event4);
+        wednesday.addEvent(event1);
 
         Day thursday = new Day();
         thursday.setDay(" Thursday \n November 1 ");
+        thursday.addEvent(event4);
+        thursday.addEvent(EventList.events.get(4));
+        thursday.addEvent(EventList.events.get(5));
 
         Day friday = new Day();
         friday.setDay(" Friday \n November 2 ");
+        friday.addEvent(event4);
+        friday.addEvent(EventList.events.get(4));
+        friday.addEvent(EventList.events.get(2));
+        friday.addEvent(EventList.events.get(6));
 
         Day saturday = new Day();
         saturday.setDay(" Saturday \n November 3 ");
+        saturday.addEvent(EventList.events.get(0));
+        saturday.addEvent(EventList.events.get(5));
+        saturday.addEvent(EventList.events.get(2));
 
         Day sunday = new Day();
         sunday.setDay(" Sunday \n November 4 ");
+        sunday.addEvent(EventList.events.get(1));
+        sunday.addEvent(EventList.events.get(6));
+        sunday.addEvent(EventList.events.get(4));
 
         days.add(tuesday);
         days.add(wednesday);

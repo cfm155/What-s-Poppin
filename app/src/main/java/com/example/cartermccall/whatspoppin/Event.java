@@ -11,7 +11,8 @@ public class Event extends RealmObject implements Serializable {
     private String date;
     private String location;
     private String description = "No description available";
-    private float rating = 0;
+    private String time;
+    private double rating = 0;
 
     public String getTitle() {
         return title;
@@ -45,11 +46,19 @@ public class Event extends RealmObject implements Serializable {
         this.description = description;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

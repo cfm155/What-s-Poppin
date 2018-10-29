@@ -39,7 +39,7 @@ public class EventActivity extends AppCompatActivity {
 
         Event event = (Event) getIntent().getSerializableExtra("event");
         title.setText(event.getTitle());
-        date.setText(event.getDate());
+        date.setText(event.getDate() + ", " + event.getTime());
         location.setText(event.getLocation());
         description.setText(event.getDescription());
         rating.setText(" " + event.getRating() + "% of people say it's poppin' ");
