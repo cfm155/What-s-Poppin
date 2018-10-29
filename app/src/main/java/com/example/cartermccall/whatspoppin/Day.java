@@ -8,7 +8,9 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+
 public class Day implements Serializable {
+
 
     private String day;
 
@@ -33,4 +35,5 @@ public class Day implements Serializable {
     public void setDailyEvents(ArrayList<Event> dailyEvents) {
         this.dailyEvents = dailyEvents;
     }
+
 }

@@ -5,13 +5,15 @@ import java.io.Serializable;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Event extends RealmObject implements Serializable {
+public class Event extends RealmObject {
     @PrimaryKey
     private String title;
     private String date;
     private String location;
+
     private String description = "No description available";
     private float rating = 0;
+
 
     public String getTitle() {
         return title;
@@ -27,6 +29,14 @@ public class Event extends RealmObject implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime(){
+        return time;
     }
 
     public String getLocation() {

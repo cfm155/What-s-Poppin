@@ -8,18 +8,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
 public class EventActivity extends AppCompatActivity {
     private TextView title;
+
     private TextView date;
     private TextView location;
     private TextView description;
     private TextView rating;
     private Button voteButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+
 
         voteButton = (Button) findViewById(R.id.vote_button);
         title = (TextView) findViewById(R.id.textView);
@@ -43,5 +50,9 @@ public class EventActivity extends AppCompatActivity {
         location.setText(event.getLocation());
         description.setText(event.getDescription());
         rating.setText(" " + event.getRating() + "% of people say it's poppin' ");
+
     }
+
+
+
 }

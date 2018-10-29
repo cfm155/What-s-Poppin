@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 /**
@@ -36,32 +38,27 @@ public class EventList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_list, container, false);
 
-        final ArrayList<Event> events = new ArrayList<Event>();
+        Realm realm = Realm.getDefaultInstance();
+
+
+        if(realm.where(Week.class).findAll().size() == 0) {
+            populateWeeks();
+        }
+
+        final RealmResults<Week> weeks = realm.where(Week.class).findAll();
         eventList = (RecyclerView)view.findViewById(R.id.event_list);
 
-        System.out.println(Calendar.getInstance().getTime());
-
-        Event event1 = new Event();
-        event1.setTitle("Swine and Psalms");
-        event1.setDate("October 30");
-        event1.setLocation("A cornfield");
-
-        Event event2 = new Event();
-        event2.setTitle("Less Swine, More Psalms");
-        event2.setDate("October 31");
-        event2.setLocation("A cornfield over");
-
-        events.add(event1);
-        events.add(event2);
         layoutManager = new LinearLayoutManager(getContext());
         eventList.setLayoutManager(layoutManager);
 
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                    Event event = (Event) events.get(position);
+                    //get positions are hardcoded placeholders, eventually replace with get current
+                //  week/day etc.
+                    Event event = (Event) weeks.get(0).listGet(0).getEvent(position);
                     Intent intent = new Intent(view.getContext(), EventActivity.class);
-                    intent.putExtra("event", (Serializable)event);
+                    intent.putExtra("event", event.getId());
                     startActivity(intent);
 
             }
@@ -69,12 +66,69 @@ public class EventList extends Fragment {
 
 
 
-        eventAdapter = new EventAdapter(getContext(),events, listener);
+        eventAdapter = new EventAdapter(getContext(), weeks, listener);
         eventList.setAdapter(eventAdapter);
 
         return view;
 
 
+    }
+
+    //Offline placeholder for adding events to the server and creating the week object and its
+    // contents
+    public void populateWeeks() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                Week week = new Week();
+
+                Day sunday, monday, tuesday, wednesday, thursday, friday, saturday;
+                sunday = monday = tuesday = wednesday = thursday = friday = saturday = new Day();
+
+                //sunday (0)
+                Event event1 = new Event();
+                event1.setTitle("Swine and Psalms");
+                event1.setDate("October 30");
+                event1.setLocation("A cornfield");
+                event1.setTime("19:30");
+                event1.setId("S&P");
+                sunday.addEvent(event1);
+
+                Event event2 = new Event();
+                event2.setTitle("Less Swine, More Psalms");
+                event2.setDate("October 31");
+                event2.setLocation("A cornfield over");
+                event2.setTime("20:20");
+                event2.setId("MSMP");
+                sunday.addEvent(event2);
+
+                //monday (1)
+
+                //tuesday (2)
+
+                //wednesday (3)
+
+                //thursday (4)
+
+                //friday (5)
+
+                //saturday (6)
+
+                //RealmUpdate
+
+                week.listAdd(sunday, 0);
+                week.listAdd(monday, 1);
+                week.listAdd(tuesday, 2);
+                week.listAdd(wednesday, 3);
+                week.listAdd(thursday, 4);
+                week.listAdd(friday, 5);
+                week.listAdd(saturday, 6);
+
+                realm.copyToRealmOrUpdate(week);
+            }
+        });
     }
 
 }

@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import io.realm.RealmResults;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private Context context;
-    private ArrayList<Event> events;
+    private RealmResults<Week> weeks;
     private RecyclerViewClickListener mListener;
 
-    public EventAdapter(Context context, ArrayList<Event> dataSet, RecyclerViewClickListener clickListener) {
+    public EventAdapter(Context context, RealmResults<Week> dataSet, RecyclerViewClickListener clickListener) {
         this.context = context;
-        this.events = dataSet;
+        this.weeks = dataSet;
         this.mListener = clickListener;
     }
 
@@ -45,7 +45,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public int getItemCount(){
-        return events.size();
+        return weeks.get(0).listGet(0).getEventSize();
     }
 
     @Override
@@ -58,6 +58,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
+
         holder.titleView.setText(events.get(position).getTitle());
         holder.dateView.setText(events.get(position).getDate());
         holder.locationView.setText(events.get(position).getLocation());
@@ -67,6 +68,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         else if(events.get(position).getRating() < 67){
             holder.poppinView.setImageResource(R.drawable.half_popped);
         }
+
     }
 
 }
