@@ -10,6 +10,8 @@ public class Event extends RealmObject implements Serializable {
     private String title;
     private String date;
     private String location;
+    private String description = "No description available";
+    private float rating = 0;
 
     public String getTitle() {
         return title;
@@ -33,5 +35,21 @@ public class Event extends RealmObject implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
