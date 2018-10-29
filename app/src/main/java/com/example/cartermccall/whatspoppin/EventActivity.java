@@ -10,21 +10,28 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class EventActivity extends AppCompatActivity {
-    private TextView textView;
+    private TextView title;
+    private TextView day;
+    private TextView time;
+    private TextView where;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
-        textView = (TextView) findViewById(R.id.textView);
-
-        Event event = (Event) getIntent().getSerializableExtra("event");
-        textView.setText(event.getTitle());
+        title = (TextView) findViewById(R.id.eventTitle);
+        day = findViewById(R.id.eventDay);
+        time = findViewById(R.id.eventTime);
+        where = findViewById(R.id.eventWhere);
 
         Realm realm = Realm.getDefaultInstance();
-        final RealmResults<Week> weeks = realm.where(Week.class).findAll();
-
+        String id = getIntent().getStringExtra("event");
+        Event event = realm.where(Event.class).equalTo("id", id).findFirst();
+        title.setText(event.getTitle());
+        day.setText(event.getDate());
+        time.setText(event.getTime());
+        where.setText(event.getLocation());
 
     }
 
