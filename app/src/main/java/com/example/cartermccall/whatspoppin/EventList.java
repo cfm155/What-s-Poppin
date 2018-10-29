@@ -54,9 +54,11 @@ public class EventList extends Fragment {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                    Event event = (Event) events.get(position);
+                    //get positions are hardcoded placeholders, eventually replace with get current
+                //  week/day etc.
+                    Event event = (Event) weeks.get(0).listGet(0).getEvent(position);
                     Intent intent = new Intent(view.getContext(), EventActivity.class);
-                    intent.putExtra("event", (Serializable)event);
+                    intent.putExtra("event", event.getId());
                     startActivity(intent);
 
             }
@@ -91,6 +93,7 @@ public class EventList extends Fragment {
                 event1.setDate("October 30");
                 event1.setLocation("A cornfield");
                 event1.setTime("19:30");
+                event1.setId("S&P");
                 sunday.addEvent(event1);
 
                 Event event2 = new Event();
@@ -98,6 +101,7 @@ public class EventList extends Fragment {
                 event2.setDate("October 31");
                 event2.setLocation("A cornfield over");
                 event2.setTime("20:20");
+                event2.setId("MSMP");
                 sunday.addEvent(event2);
 
                 //monday (1)
